@@ -64,9 +64,8 @@ jobs:
 
       - name: Upload artifact to server and deploy
         run: |
-          scp ./artifact/*.jar ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/tmp/*.jar
+          scp ./artifact/*.jar ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/tmp/app.jar
           ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             mkdir -p ~/deploy/releases
-            mv /tmp/*.jar ~/deploy/releases
-            rm /tmp/*.jar
+            mv /tmp/app.jar ~/deploy/releases
           EOF
